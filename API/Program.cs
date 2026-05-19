@@ -1,36 +1,41 @@
+using API.Controllers;
+using API.Repositories;
+using API.Services;
 
-namespace API;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
+// --- Aspire service defaults (telemetry, health checks, etc.) ---
+builder.AddServiceDefaults();
+
+// --- OpenAPI / Swagger ---
+builder.Services.AddOpenApi();
+
+// --- Game services ---
+// Singleton repository: holds all in-memory game state for the lifetime of the process.
+builder.Services.AddSingleton<IGameRepository, InMemoryGameRepository>();
+
+// BotService is stateless, safe as singleton.
+builder.Services.AddSingleton<BotService>();
+
+// GameService depends on the two singletons above; singleton is fine here too.
+builder.Services.AddSingleton<IGameService, GameService>();
+
+// -----------------------------------------------------------------------
+
+var app = builder.Build();
+
+// --- Aspire default endpoints (health, liveness) ---
+app.MapDefaultEndpoints();
+
+// --- Swagger UI in development ---
+if (app.Environment.IsDevelopment())
 {
-    public static void Main(string[] args)
-    {
-        var builder = WebApplication.CreateBuilder(args);
-        builder.AddServiceDefaults();
-
-        // Add services to the container.
-
-        builder.Services.AddControllers();
-        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-        builder.Services.AddOpenApi();
-
-        var app = builder.Build();
-
-        app.MapDefaultEndpoints();
-
-        // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.MapOpenApi();
-        }
-
-        app.UseHttpsRedirection();
-
-        app.UseAuthorization();
-
-
-        app.MapControllers();
-
-        app.Run();
-    }
+    app.MapOpenApi();
 }
+
+app.UseHttpsRedirection();
+
+// --- Game endpoints ---
+app.MapGameEndpoints();
+
+app.Run();
