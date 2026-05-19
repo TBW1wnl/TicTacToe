@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="API/API.csproj" />
+  <Project Path="TicTacToe.AppHost/TicTacToe.AppHost.csproj" />
+  <Project Path="TicTacToe.ServiceDefaults/TicTacToe.ServiceDefaults.csproj" />
+</Solution>
