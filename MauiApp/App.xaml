@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TicTacToe.Maui.App">
+
+    <Application.Resources>
+        <ResourceDictionary xmlns:conv="clr-namespace:TicTacToe.Maui.Converters">
+
+            <conv:InverseBoolConverter x:Key="InverseBoolConverter"/>
+
+            <Color x:Key="PageBackground">#0d0d1a</Color>
+            <Color x:Key="SurfaceColor">#1a1a30</Color>
+            <Color x:Key="CellEmpty">#1e1e3c</Color>
+            <Color x:Key="CellX">#0d2340</Color>
+            <Color x:Key="CellO">#400d0d</Color>
+            <Color x:Key="AccentX">#00cfff</Color>
+            <Color x:Key="AccentO">#ff6b35</Color>
+            <Color x:Key="PrimaryButton">#3d5a80</Color>
+            <Color x:Key="TextPrimary">#ffffff</Color>
+            <Color x:Key="TextSecondary">#8888bb</Color>
+            <Style x:Key="CellButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="44"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="CornerRadius" Value="18"/>
+                <Setter Property="BorderWidth" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal"/>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="Opacity" Value="1"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="Opacity" Value="0.7"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryButton}"/>
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="CornerRadius" Value="28"/>
+                <Setter Property="HeightRequest" Value="56"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal"/>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="Opacity" Value="0.5"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
